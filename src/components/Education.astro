@@ -1,0 +1,97 @@
+---
+import Bars from "./Bars.astro";
+import svgUnderline from "../assets/underline.svg";
+import iitmLogo from "../assets/education/iitm.png";
+import maitLogo from "../assets/education/mait.jpeg";
+
+const education = [
+  {
+    institution: "Indian Institute of Technology, Madras",
+    degree: "Bachelor of Science in Data Science and Applications",
+    period: "2023 – 2027 (Expected)",
+    cgpa: "9.77",
+    highlight: true,
+  },
+  {
+    institution: "Maharaja Agrasen Institute of Technology",
+    degree: "Bachelor of Technology in Computer Science Technology",
+    period: "2023 – 2027 (Expected)",
+    cgpa: "9.451",
+    highlight: true,
+  },
+  {
+    institution: "St. Mark's Sr. Sec. Public School, Meera Bagh",
+    degree: "Central Board of Secondary Education XIIth",
+    period: "2022 – 2023",
+    cgpa: "92.2%",
+    highlight: false,
+  },
+];
+---
+
+<section class="py-25 space-y-10 px-5" id="education">
+  <div class="max-w-md mx-auto relative">
+    <h1 class="text-4xl font-medium text-center">Education</h1>
+    <img
+      src={svgUnderline.src}
+      alt="underline"
+      width="140"
+      class="absolute left-50 -bottom-1"
+    />
+  </div>
+
+  <div class="max-w-4xl mx-auto space-y-6">
+    {
+      education.map((item, index) => (
+        <div class="bg-white p-6 border-2 relative transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,0.3)] group">
+          <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+            <div class="flex-1 space-y-2">
+              <div class="flex items-start gap-3">
+                <div class="flex-shrink-0 mt-1">
+                  {item.institution.includes(
+                    "Indian Institute of Technology"
+                  ) ? (
+                    <img
+                      src={iitmLogo.src}
+                      alt="IIT Madras"
+                      class="w-10 h-10 object-contain"
+                    />
+                  ) : item.institution.includes("Maharaja Agrasen") ? (
+                    <img
+                      src={maitLogo.src}
+                      alt="MAIT"
+                      class="w-10 h-10 object-cover rounded-md"
+                    />
+                  ) : (
+                    <div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold">
+                      {index + 1}
+                    </div>
+                  )}
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl md:text-2xl font-medium">
+                    {item.institution}
+                  </h3>
+                  <p class="text-base md:text-lg mt-1">{item.degree}</p>
+                  <p class="text-sm text-gray-600 mt-2">{item.period}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex-shrink-0">
+              <div
+                class={`px-4 py-2 border-2 ${item.highlight ? "bg-[var(--yellow)]" : "bg-white"}`}
+              >
+                <p class="text-sm uppercase font-medium">
+                  {item.cgpa.includes("%") ? "Percentage" : "CGPA"}
+                </p>
+                <p class="text-2xl font-bold">{item.cgpa}</p>
+              </div>
+            </div>
+          </div>
+          <Bars />
+        </div>
+      ))
+    }
+  </div>
+</section>

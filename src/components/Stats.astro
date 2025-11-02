@@ -1,0 +1,65 @@
+---
+const stats = [
+  {
+    value: "9.77",
+    label: "CGPA at IIT Madras",
+    sublabel: "Data Science & Applications",
+    icon: "ri-graduation-cap-line",
+    color: "var(--yellow)",
+  },
+  {
+    value: "2000+",
+    label: "Schools Served",
+    sublabel: "CBSE Parser Platform",
+    icon: "ri-building-line",
+    color: "var(--pink)",
+  },
+  {
+    value: "125K+",
+    label: "Platform Requests",
+    sublabel: "International Reach",
+    icon: "ri-global-line",
+    color: "var(--blue)",
+  },
+  {
+    value: "6+",
+    label: "Major Awards",
+    sublabel: "Hackathons & Competitions",
+    icon: "ri-trophy-line",
+    color: "var(--yellow)",
+  },
+];
+---
+
+<section
+  class="relative px-3 md:px-10 py-20 overflow-hidden bg-[#f9f9f9]"
+  id="stats"
+>
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-medium mb-3">
+        Impact & Recognition
+      </h2>
+      <p class="text-lg text-gray-700">Key achievements and metrics</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        stats.map((stat) => (
+          <div class="bg-white p-6 border-2 relative transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,0.3)] hover:-translate-y-1 group text-center">
+            <div
+              class="w-14 h-14 mx-auto flex items-center justify-center text-3xl border-2"
+              style={`background-color: ${stat.color}`}
+            >
+              <i class={stat.icon} />
+            </div>
+
+            <div class="text-4xl font-bold mb-2">{stat.value}</div>
+            <div class="text-base font-medium mb-1">{stat.label}</div>
+            <div class="text-sm text-gray-600">{stat.sublabel}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
