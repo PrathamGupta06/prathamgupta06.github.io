@@ -1,0 +1,23 @@
+---
+import Button from "./Button.astro";
+import { author } from "../sample";
+---
+
+<section class="px-3 py-20" id="cta">
+  <div
+    class="max-w-3xl mx-auto bg-white text-center flex flex-col gap-4 border-3 shadow-[8px_8px_0px_rgba(0,0,0,0.3)] relative p-10"
+  >
+    <h1 class="text-3xl md:text-4xl font-medium">
+      Let's Build Something Amazing
+    </h1>
+    <p class="text-lg max-w-lg mx-auto">
+      Interested in AI solutions, full-stack development, or collaboration?
+      Let's connect and create something impactful together.
+    </p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <Button text="Email Me" link={author.email} target="_blank" />
+      <Button text="View GitHub" link={author.github} target="_blank" />
+      <Button text="LinkedIn" link={author.linkedin} target="_blank" />
+    </div>
+  </div>
+</section>

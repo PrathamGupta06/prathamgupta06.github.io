@@ -1,0 +1,62 @@
+---
+import { author } from '../sample'
+import svgUnderline from '../assets/underline.svg'
+
+const contactMethods = [
+  {
+    icon: 'ri-mail-line',
+    label: 'Email',
+    value: 'prathamgupta006@gmail.com',
+    link: author.email,
+    color: 'var(--yellow)'
+  },
+  {
+    icon: 'ri-linkedin-box-line',
+    label: 'LinkedIn',
+    value: 'prathamgupta006',
+    link: author.linkedin,
+    color: 'var(--blue)'
+  },
+  {
+    icon: 'ri-github-line',
+    label: 'GitHub',
+    value: 'PrathamGupta06',
+    link: author.github,
+    color: 'var(--yellow)'
+  }
+]
+---
+
+<section class="py-25 space-y-10 px-5" id="contact">
+  <div class="max-w-md mx-auto relative">
+    <h1 class="text-4xl font-medium text-center">Get In Touch</h1>
+    <img src={svgUnderline.src} alt="underline" width="140" class="absolute left-50 -bottom-1" />
+  </div>
+
+  <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+    {contactMethods.map((contact) => (
+      <a 
+        href={contact.link}
+        target={contact.link.startsWith('http') ? '_blank' : '_self'}
+        rel={contact.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+        class="bg-white p-6 border-2 relative transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,0.3)] hover:-translate-y-1 group"
+      >
+        <div class="flex items-center gap-4">
+          <div 
+            class="w-14 h-14 flex items-center justify-center border-2 flex-shrink-0"
+            style={`background-color: ${contact.color}`}
+          >
+            <i class={`${contact.icon} text-3xl`}></i>
+          </div>
+          
+          <div class="flex-1">
+            <p class="text-sm uppercase font-medium text-gray-600 mb-1">{contact.label}</p>
+            <p class="text-lg font-medium break-all">{contact.value}</p>
+          </div>
+          
+          <i class="ri-arrow-right-up-line text-2xl opacity-0 group-hover:opacity-100 transition-opacity"></i>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

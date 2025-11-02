@@ -1,0 +1,45 @@
+---
+import Bars from "./Bars.astro"
+import svgUnderline from '../assets/underline.svg'
+
+const cpStats = [
+  {
+    platform: 'ACM ICPC',
+    achievement: 'Regionalist - 2025',
+    icon: 'ri-award-line',
+    highlight: true
+  },
+  {
+    platform: 'CodeChef',
+    achievement: '1762 (Max Rating)',
+    icon: 'ri-code-s-slash-line',
+    highlight: true
+  }
+]
+---
+
+<section class="py-25 space-y-10 px-5" id="competitive-programming">
+  <div class="max-w-md mx-auto relative">
+    <h1 class="text-4xl font-medium text-center">Competitive Programming</h1>
+    <img src={svgUnderline.src} alt="underline" width="200" class="absolute left-50 -bottom-1" />
+  </div>
+
+  <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+    {cpStats.map((stat) => (
+      <div class="bg-white p-8 border-2 relative transition-all duration-200 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.3)] group">
+        <div class="flex flex-col items-center text-center space-y-4">
+          <div class="w-16 h-16 mx-auto flex items-center justify-center text-4xl bg-[var(--yellow)] border-2">
+            <i class={stat.icon}></i>
+          </div>
+          
+          <div>
+            <h3 class="text-2xl font-medium mb-2">{stat.platform}</h3>
+            <p class="text-xl font-bold text-gray-700">{stat.achievement}</p>
+          </div>
+        </div>
+        
+        <Bars />
+      </div>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,50 @@
+---
+import Bars from "./Bars.astro"
+import svgUnderline from '../assets/underline.svg'
+
+const certifications = [
+  {
+    name: 'Microsoft Certified: Azure Fundamentals (AZ-900)',
+    issuer: 'Microsoft',
+    icon: 'ri-cloud-line',
+    color: 'var(--pink)'
+  },
+  {
+    name: 'Google Cloud Computing Foundations',
+    issuer: 'Google Cloud Study Jam 2023',
+    icon: 'ri-google-line',
+    color: 'var(--yellow)'
+  },
+  {
+    name: 'Generative AI',
+    issuer: 'Google Cloud Study Jam 2023',
+    icon: 'ri-robot-line',
+    color: 'var(--pink)'
+  }
+]
+---
+
+<section class="py-25 space-y-10 px-5" id="certifications">
+  <div class="max-w-md mx-auto relative">
+    <h1 class="text-4xl font-medium text-center">Certifications</h1>
+    <img src={svgUnderline.src} alt="underline" width="140" class="absolute left-50 -bottom-1" />
+  </div>
+
+  <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+    {certifications.map((cert) => (
+      <div class="bg-white p-6 border-2 relative transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,0.3)] hover:-translate-y-1 group">
+        <div 
+          class="w-12 h-12 flex items-center justify-center text-3xl mb-4 border-2"
+          style={`background-color: ${cert.color}`}
+        >
+          <i class={cert.icon}></i>
+        </div>
+        
+        <h3 class="text-base font-medium mb-2 min-h-[3rem]">{cert.name}</h3>
+        <p class="text-sm text-gray-600">{cert.issuer}</p>
+        
+        <Bars />
+      </div>
+    ))}
+  </div>
+</section>

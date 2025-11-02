@@ -1,0 +1,102 @@
+---
+import Bars from "./Bars.astro";
+import svgUnderline from "../assets/underline.svg";
+
+const achievements = [
+  {
+    title: "Fourth Prize & Darkhorse Award",
+    event: "HackRX 6.0 by Bajaj Finserv",
+    detail: "Among 10,000+ participants",
+    icon: "ri-trophy-line",
+    color: "var(--yellow)",
+  },
+  {
+    title: "Second Prize",
+    event: "Cognizance Hackathon",
+    detail: "IIT Roorkee",
+    icon: "ri-medal-line",
+    color: "var(--pink)",
+  },
+  {
+    title: "Top 10 Position",
+    event: "National Level Pentathon 2024",
+    detail: "NCIIPC and AICTE",
+    icon: "ri-focus-3-line",
+    color: "var(--yellow)",
+  },
+  {
+    title: "Third Prize",
+    event: "GooseCTF",
+    detail: "Warwick Cyber Security Society (International)",
+    icon: "ri-shield-star-line",
+    color: "var(--pink)",
+  },
+  {
+    title: "Third Prize",
+    event: "Mathematical R&D",
+    detail: "9th International Young Mathematician's Convention 2022",
+    icon: "ri-bar-chart-line",
+    color: "var(--yellow)",
+  },
+  {
+    title: "International Rank 4",
+    event: "International Olympiad of Mathematics",
+    detail: "Silverzone Foundation (Level 1)",
+    icon: "ri-global-line",
+    color: "var(--pink)",
+  },
+];
+---
+
+<section
+  class="py-25 space-y-10 px-5 bg-[#f9f9f9] relative overflow-hidden"
+  id="achievements"
+>
+  <div class="max-w-md mx-auto relative">
+    <h1 class="text-4xl font-medium text-center">Achievements & Awards</h1>
+    <img
+      src={svgUnderline.src}
+      alt="underline"
+      width="140"
+      class="absolute left-50 -bottom-1"
+    />
+  </div>
+
+  <div
+    class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+  >
+    {
+      achievements.map((achievement) => (
+        <div class="bg-white p-6 border-2 relative transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,0.3)] hover:-translate-y-1 group">
+          <div
+            class="w-12 h-12 flex items-center justify-center text-3xl mb-4 border-2"
+            style={`background-color: ${achievement.color}`}
+          >
+            <i class={achievement.icon} />
+          </div>
+
+          <h3 class="text-lg font-medium mb-2 min-h-[3rem]">
+            {achievement.title}
+          </h3>
+          <p class="text-sm font-medium text-gray-700 mb-1">
+            {achievement.event}
+          </p>
+          <p class="text-xs text-gray-600">{achievement.detail}</p>
+
+          <Bars />
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="max-w-4xl mx-auto text-center mt-10">
+    <div
+      class="inline-block bg-white px-6 py-3 border-2 shadow-[2px_2px_0px_rgba(0,0,0,0.2)]"
+    >
+      <p class="text-sm uppercase font-medium text-gray-600">
+        Total Recognition
+      </p>
+      <p class="text-3xl font-bold mt-1">6+ Major Awards</p>
+    </div>
+  </div>
+</section>

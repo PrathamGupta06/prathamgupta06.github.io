@@ -1,0 +1,96 @@
+---
+import Bars from "./Bars.astro";
+import svgUnderline from "../assets/underline.svg";
+
+const projects = [
+  {
+    name: "CBSE Results Parser & Analytics Platform",
+    tech: "NextJS, Firebase, Cloudflare, Vercel",
+    description:
+      "Developed web platform for automated CBSE result processing, serving 2000+ schools with 125K+ requests and 10K+ unique visits internationally",
+    features: [
+      "Built smart parser with statistical analysis and Firebase authentication",
+      "Deployed with both web and CLI interface",
+    ],
+    link: "https://cbseresult.pratham.eu.org/",
+    linkText: "Live Demo",
+    stats: ["2000+ Schools", "125K+ Requests", "10K+ Visits"],
+  },
+  {
+    name: "TripAlly - AI Travel Planning Assistant",
+    tech: "Python, LangGraph, FastAPI, Groq",
+    description:
+      "Engineered AI travel concierge using multi-agent architecture with Groq's ultra-fast LLMs and browsing automation along with SSE for end-to-end booking procedure",
+    features: [
+      "Multi-agent architecture with Groq's ultra-fast LLMs",
+      "End-to-end booking automation with SSE",
+    ],
+    link: "https://github.com/PrathamGupta06",
+    linkText: "GitHub",
+    stats: ["AI-Powered", "Multi-Agent", "FastAPI"],
+  },
+];
+---
+
+<section class="py-25 space-y-10 px-5" id="projects">
+  <div class="max-w-md mx-auto relative">
+    <h1 class="text-4xl font-medium text-center">Featured Projects</h1>
+    <img
+      src={svgUnderline.src}
+      alt="underline"
+      width="140"
+      class="absolute left-50 -bottom-1"
+    />
+  </div>
+
+  <div class="max-w-4xl mx-auto grid grid-cols-1 gap-8">
+    {
+      projects.map((project, index) => (
+        <div class="bg-white p-6 md:p-8 border-2 relative transition-all duration-200 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.3)] group">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold text-lg">
+              {index + 1}
+            </div>
+            <div class="flex-1">
+              <h3 class="text-xl md:text-2xl font-medium">{project.name}</h3>
+              <p class="text-sm text-gray-600 mt-1 font-medium">
+                {project.tech}
+              </p>
+            </div>
+          </div>
+
+          <p class="text-base leading-relaxed mb-4">{project.description}</p>
+
+          <ul class="space-y-2 mb-4">
+            {project.features.map((feature) => (
+              <li class="flex gap-2 text-sm">
+                <span class="flex-shrink-0">✓</span>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            {project.stats.map((stat) => (
+              <span class="px-3 py-1 bg-[var(--yellow)] border-2 text-xs font-medium uppercase">
+                {stat}
+              </span>
+            ))}
+          </div>
+
+          <a
+            href={project.link}
+            class="inline-flex items-center gap-2 px-4 py-2 border-2 bg-white hover:bg-black hover:text-white transition-all duration-200 font-medium"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>{project.linkText}</span>
+            <i class="ri-arrow-right-up-line" />
+          </a>
+
+          <Bars />
+        </div>
+      ))
+    }
+  </div>
+</section>

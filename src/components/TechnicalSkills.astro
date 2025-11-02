@@ -1,0 +1,54 @@
+---
+import svgUnderline from '../assets/underline.svg'
+
+const skillCategories = [
+  {
+    category: 'Programming Languages',
+    skills: ['Python', 'C/C++', 'SQL', 'JavaScript'],
+    icon: 'ri-code-box-line'
+  },
+  {
+    category: 'Frameworks & Libraries',
+    skills: ['LangGraph', 'FastAPI', 'Django', 'Flask', 'React.js', 'Astro.js', 'pandas', 'OpenPyXL'],
+    icon: 'ri-stack-line'
+  },
+  {
+    category: 'AI/ML Technologies',
+    skills: ['RAG Systems', 'Multi-Agent Architecture', 'Computer Vision', 'Model Finetuning'],
+    icon: 'ri-brain-line'
+  },
+  {
+    category: 'Tools & Platforms',
+    skills: ['Linux', 'Git', 'Docker', 'Google Cloud Platform', 'Microsoft Azure', 'Firebase'],
+    icon: 'ri-tools-line'
+  }
+]
+---
+
+<section class="py-25 space-y-10 px-5 bg-[#f9f9f9]" id="skills">
+  <div class="max-w-md mx-auto relative">
+    <h1 class="text-4xl font-medium text-center">Technical Skills</h1>
+    <img src={svgUnderline.src} alt="underline" width="140" class="absolute left-50 -bottom-1" />
+  </div>
+
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+    {skillCategories.map((category, index) => (
+      <div class="bg-white p-6 border-2 relative transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,0.3)]">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 flex items-center justify-center text-2xl bg-[var(--yellow)] border-2">
+            <i class={category.icon}></i>
+          </div>
+          <h3 class="text-lg font-medium">{category.category}</h3>
+        </div>
+        
+        <div class="flex flex-wrap gap-2">
+          {category.skills.map((skill) => (
+            <span class="px-3 py-1.5 border-2 text-sm bg-white hover:bg-black hover:text-white transition-all duration-200 cursor-default">
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

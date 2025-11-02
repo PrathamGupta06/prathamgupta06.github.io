@@ -1,0 +1,55 @@
+---
+import Bars from "./Bars.astro"
+import svgUnderline from '../assets/underline.svg'
+
+const experience = [
+  {
+    role: 'AI Intern',
+    company: 'Inteligenai',
+    location: 'Gurgaon, India',
+    period: 'July 2024 – Present',
+    achievements: [
+      'Architected and developed the AI backend of Spector.ai, an AI-powered industrial reliability platform for anomaly detection and predictive maintenance, reducing asset downtime',
+      'Built and deployed end-to-end AI and computer vision pipelines with CI/CD using LangGraph and multi-agent architectures; developed, tested, and deployed scalable agentic AI solutions, taking multiple projects from 0-1'
+    ]
+  }
+]
+---
+
+<section class="py-25 space-y-10 px-5 bg-[#f9f9f9]" id="experience">
+  <div class="max-w-md mx-auto relative">
+    <h1 class="text-4xl font-medium text-center">Experience</h1>
+    <img src={svgUnderline.src} alt="underline" width="140" class="absolute left-50 -bottom-1" />
+  </div>
+
+  <div class="max-w-4xl mx-auto space-y-6">
+    {experience.map((item) => (
+      <div class="bg-white p-6 md:p-8 border-2 relative transition-all duration-200 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.3)] group">
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
+          <div class="flex-1">
+            <h3 class="text-2xl md:text-3xl font-medium">{item.role}</h3>
+            <p class="text-lg md:text-xl mt-1 font-medium">{item.company}</p>
+            <p class="text-sm text-gray-600 mt-1">{item.location}</p>
+          </div>
+          
+          <div class="flex-shrink-0">
+            <div class="px-4 py-2 border-2 bg-[var(--pink)]">
+              <p class="text-sm font-medium whitespace-nowrap">{item.period}</p>
+            </div>
+          </div>
+        </div>
+
+        <ul class="space-y-3 mt-4">
+          {item.achievements.map((achievement) => (
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 text-lg mt-1">•</span>
+              <span class="text-base leading-relaxed">{achievement}</span>
+            </li>
+          ))}
+        </ul>
+        
+        <Bars />
+      </div>
+    ))}
+  </div>
+</section>
