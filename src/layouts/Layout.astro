@@ -1,47 +1,44 @@
 ---
-import { author } from '../sample'
+import { author } from "../sample";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={author.description} />
-		<meta name="author" content={author.name} />
-		<title>{author.name} - AI/ML Engineer & Full-Stack Developer</title>
-		
-		<!-- Open Graph / Social Media Tags -->
-		<meta property="og:title" content={`${author.name} - Portfolio`} />
-		<meta property="og:description" content={author.description} />
-		<meta property="og:type" content="website" />
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={author.description} />
+    <meta name="author" content={author.name} />
+    <title>{author.name} - AI/ML Engineer & Full-Stack Developer</title>
+
+    <!-- Open Graph / Social Media Tags -->
+    <meta property="og:title" content={`${author.name} - Portfolio`} />
+    <meta property="og:description" content={author.description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
 
 <style>
+  :root {
+    --main-bg: #fefff0;
+    --blue: #bae6ff;
+    --yellow: #ffdc58;
+    --pink: #ffb6d9;
+  }
 
-:root{
-	--main-bg: #FEFFF0;
-	--blue: #BAE6FF;
-	--yellow: #FFDC58;
-	--pink: #FFB6D9;
-}
-
-html,
-body {
-	margin: 0;
-	width: 100%;
-	height: 100%;
-	background-color: var(--main-bg);
-	font-family: "Space Grotesk", sans-serif;
-	scroll-behavior: smooth;
-	scroll-padding-top: 120px; /* Offset for fixed header */
-}
-
-
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-bg);
+    font-family: "Space Grotesk", sans-serif;
+    scroll-behavior: smooth;
+    scroll-padding-top: 120px; /* Offset for fixed header */
+  }
 </style>
