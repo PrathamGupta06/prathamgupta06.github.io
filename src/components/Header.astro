@@ -4,7 +4,7 @@ import logoStar from "../assets/logo-star.svg";
 import { author, buy } from "../sample";
 
 const links = [
-  { name: "About", path: "/#", target: "_self", section: "hero" },
+  { name: "About", path: "/#hero", target: "_self", section: "hero" },
   {
     name: "Experience",
     path: "/#experience",
@@ -37,7 +37,7 @@ const { pathname } = Astro.url;
 ---
 
 <header
-  class="fixed top-0 left-0 right-0 z-50 border-b-3 p-4 md:p-7 overflow-hidden bg-[var(--main-bg)]"
+  class="fixed top-0 left-0 right-0 z-50 border-b-3 p-4 md:p-7 overflow-hidden bg-(--main-bg)"
 >
   <div
     class="flex border-3 border-black bg-white max-w-[310px] md:max-w-2xl m-auto relative z-10"
@@ -70,7 +70,7 @@ const { pathname } = Astro.url;
                 href={item.path}
                 target={item.target}
                 data-section={item.section}
-                class="nav-link whitespace-nowrap relative flex items-center justify-center before:absolute before:left-0 before:bottom-1 before:h-[8px] before:w-0 before:bg-[var(--yellow)] before:transition-all before:duration-300 hover:before:w-full"
+                class="nav-link whitespace-nowrap relative flex items-center justify-center before:absolute before:left-0 before:bottom-1 before:h-2 before:w-0 before:bg-(--yellow) before:transition-all before:duration-300 hover:before:w-full"
               >
                 <span class="relative z-5">{item.name}</span>
               </a>
@@ -83,7 +83,7 @@ const { pathname } = Astro.url;
 </header>
 
 <div
-  class="block md:hidden fixed left-0 top-0 h-full w-full bg-white z-20 p-3 transition-all duration-300 -translate-x-[100%]"
+  class="block md:hidden fixed left-0 top-0 h-full w-full bg-white z-20 p-3 transition-all duration-300 -translate-x-full"
   id="menu-content"
 >
   <div class="flex p-6">
@@ -133,35 +133,58 @@ const { pathname } = Astro.url;
       });
     });
 
-    // Scroll-based active section highlighting
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll(".nav-link");
+    // Active section highlighting via IntersectionObserver
+    const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+    const navSectionIds = Array.from(
+      new Set(
+        navLinks
+          .map((link) => link.getAttribute("data-section"))
+          .filter((id): id is string => id !== null),
+      ),
+    );
+    const navSections = navSectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
 
-    function highlightActiveSection() {
-      const scrollY = window.scrollY + 100; // Offset for better UX
-
-      sections.forEach((section) => {
-        const sectionTop =
-          section instanceof HTMLElement ? section.offsetTop : 0;
-        const sectionHeight =
-          section instanceof HTMLElement ? section.offsetHeight : 0;
-        const sectionId = section.getAttribute("id");
-
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-          navLinks.forEach((link) => {
-            const linkSection = link.getAttribute("data-section");
-            if (linkSection === sectionId) {
-              link.classList.add("active");
-            } else {
-              link.classList.remove("active");
-            }
-          });
-        }
+    function setActive(sectionId: string | null) {
+      navLinks.forEach((link) => {
+        const linkSection = link.getAttribute("data-section");
+        link.classList.toggle(
+          "active",
+          !!sectionId && linkSection === sectionId,
+        );
       });
     }
 
-    window.addEventListener("scroll", highlightActiveSection);
-    highlightActiveSection(); // Call on load
+    // Track intersection ratio per section; pick the most visible one.
+    const ratios = new Map();
+    navSections.forEach((s) => ratios.set(s.id, 0));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          ratios.set(entry.target.id, entry.intersectionRatio);
+        });
+
+        let bestId = null;
+        let bestRatio = 0;
+        ratios.forEach((ratio, id) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
+          }
+        });
+
+        setActive(bestId ?? navSections[0]?.id ?? null);
+      },
+      {
+        // Treat the area below the fixed header as the viewport.
+        rootMargin: "-120px 0px -40% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      },
+    );
+
+    navSections.forEach((section) => observer.observe(section));
   });
 </script>
 
