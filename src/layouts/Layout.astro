@@ -1,34 +1,72 @@
 ---
 import { author } from "../sample";
+import profile from "../assets/profile.jpg";
+
+const title = `${author.name} | ${author.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(profile.src, Astro.site).href;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: author.name,
+  jobTitle: author.tagline,
+  url: Astro.site?.href,
+  image: ogImage,
+  email: author.emailAddress,
+  sameAs: [author.github, author.linkedin],
+};
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonical} />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={author.description} />
     <meta name="author" content={author.name} />
-    <title>{author.name} - AI/ML Engineer & Full-Stack Developer</title>
+    <title>{title}</title>
 
     <!-- Open Graph / Social Media Tags -->
-    <meta property="og:title" content={`${author.name} - Portfolio`} />
+    <meta property="og:title" content={title} />
     <meta property="og:description" content={author.description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={author.description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+    />
   </head>
   <body>
     <slot />
   </body>
 </html>
 
-<style>
+<style is:global>
   :root {
     --main-bg: #fefff0;
+    --alt-bg: #f7f5df;
     --blue: #bae6ff;
     --yellow: #ffdc58;
     --pink: #ffb6d9;
+    --green: #22c55e;
   }
 
   html,
@@ -38,6 +76,6 @@ import { author } from "../sample";
     background-color: var(--main-bg);
     font-family: "Space Grotesk", sans-serif;
     scroll-behavior: smooth;
-    scroll-padding-top: 120px; /* Offset for fixed header */
+    scroll-padding-top: 100px; /* Offset for fixed header */
   }
 </style>

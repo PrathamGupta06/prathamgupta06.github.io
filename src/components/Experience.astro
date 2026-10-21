@@ -1,55 +1,77 @@
 ---
-import Bars from "./Bars.astro"
-import svgUnderline from '../assets/underline.svg'
+import SectionHeading from "./SectionHeading.astro"
 
 const experience = [
+  {
+    role: 'ML Intern',
+    company: 'Tower Research Capital',
+    team: 'Core AI & Machine Learning',
+    location: 'Gurgaon, India',
+    period: 'Jan 2026 – Present',
+    current: true,
+    achievements: [
+      'Build auto-research tooling that speeds up quantitative research workflows.',
+      'Develop proactive and reactive AI agents, contributing to the zero-to-one build-out of internal agentic workflows that automate firm-wide operational tasks.',
+    ],
+    tags: ['AI Agents', 'Quant Research Tooling', 'Automation'],
+  },
   {
     role: 'AI Intern',
     company: 'Inteligenai',
     location: 'Gurgaon, India',
-    period: 'July 2024 – Present',
+    period: 'Jul 2024 – Dec 2025',
     achievements: [
-      'Architected and developed the AI backend of Spector.ai, an AI-powered industrial reliability platform for anomaly detection and predictive maintenance, reducing asset downtime',
-      'Built and deployed end-to-end AI and computer vision pipelines with CI/CD using LangGraph and multi-agent architectures; developed, tested, and deployed scalable agentic AI solutions, taking multiple projects from 0-1'
-    ]
-  }
+      'Designed the end-to-end architecture and delivered multiple large-scale AI solutions across diverse client industries.',
+      'Engineered the AI backend for Spector.ai, an AI-first industrial agent platform; architected a multi-agent system using LangGraph for automated root-cause analysis.',
+      'Deployed Vision Transformer (ViT) models on Azure Functions with ONNX optimization and quantization, cutting latency from 1s to 100ms and scaling to 1B+ inferences a year.',
+      'Built an enterprise-scale RAG pipeline that parses complex formats (PDF, DOCX) with HNSW vector search, integrating LLMs via LangChain for semantic reasoning.',
+      'Set up CI/CD with GitHub Actions and Azure DevOps to automate deployments on Docker and Kubernetes.',
+    ],
+    tags: ['LangGraph', 'RAG', 'ViT', 'ONNX', 'Azure', 'Kubernetes'],
+  },
 ]
 ---
 
-<section class="py-25 space-y-10 px-5 bg-[#f9f9f9]" id="experience">
-  <div class="max-w-md mx-auto relative">
-    <h1 class="text-4xl font-medium text-center">Experience</h1>
-    <img src={svgUnderline.src} alt="underline" width="140" class="absolute left-50 -bottom-1" />
-  </div>
+<section class="py-24 space-y-12 px-5 bg-(--alt-bg)" id="experience">
+  <SectionHeading title="Experience" />
 
-  <div class="max-w-4xl mx-auto space-y-6">
+  <ol class="max-w-4xl mx-auto relative border-l-3 ml-3 md:ml-auto space-y-10">
     {experience.map((item) => (
-      <div class="bg-white p-6 md:p-8 border-2 relative transition-all duration-200 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.3)] group">
-        <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
-          <div class="flex-1">
-            <h3 class="text-2xl md:text-3xl font-medium">{item.role}</h3>
-            <p class="text-lg md:text-xl mt-1 font-medium">{item.company}</p>
-            <p class="text-sm text-gray-600 mt-1">{item.location}</p>
-          </div>
-          
-          <div class="flex-shrink-0">
-            <div class="px-4 py-2 border-2 bg-(--pink)">
-              <p class="text-sm font-medium whitespace-nowrap">{item.period}</p>
+      <li class="relative pl-6 md:pl-10">
+        <span
+          class={`absolute -left-[11px] top-2 size-5 border-3 ${item.current ? 'bg-(--green)' : 'bg-white'}`}
+        ></span>
+
+        <div class="bg-white p-6 md:p-8 border-2 shadow-[6px_6px_0px_rgba(0,0,0,0.15)]">
+          <div class="flex flex-col md:flex-row md:items-start justify-between gap-3 mb-4">
+            <div>
+              <h3 class="text-2xl md:text-3xl font-medium">{item.company}</h3>
+              <p class="text-lg mt-1 font-medium">
+                {item.role}{item.team && <span class="text-gray-600 font-normal"> · {item.team}</span>}
+              </p>
+              <p class="text-sm text-gray-600 mt-1">{item.location}</p>
+            </div>
+            <div class="self-start px-3 py-1.5 border-2 bg-(--pink) text-sm font-medium whitespace-nowrap">
+              {item.period}
             </div>
           </div>
-        </div>
 
-        <ul class="space-y-3 mt-4">
-          {item.achievements.map((achievement) => (
-            <li class="flex gap-3">
-              <span class="flex-shrink-0 text-lg mt-1">•</span>
-              <span class="text-base leading-relaxed">{achievement}</span>
-            </li>
-          ))}
-        </ul>
-        
-        <Bars />
-      </div>
+          <ul class="space-y-2.5">
+            {item.achievements.map((achievement) => (
+              <li class="flex gap-3">
+                <span class="flex-shrink-0 mt-2.5 size-1.5 bg-black"></span>
+                <span class="text-base leading-relaxed">{achievement}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="flex flex-wrap gap-2 mt-5">
+            {item.tags.map((tag) => (
+              <span class="px-2.5 py-0.5 border-2 text-xs font-medium uppercase bg-(--main-bg)">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </li>
     ))}
-  </div>
+  </ol>
 </section>

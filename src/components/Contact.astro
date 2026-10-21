@@ -1,62 +1,29 @@
 ---
-import { author } from '../sample'
-import svgUnderline from '../assets/underline.svg'
-
-const contactMethods = [
-  {
-    icon: 'ri-mail-line',
-    label: 'Email',
-    value: 'prathamgupta006@gmail.com',
-    link: author.email,
-    color: 'var(--yellow)'
-  },
-  {
-    icon: 'ri-linkedin-box-line',
-    label: 'LinkedIn',
-    value: 'prathamgupta006',
-    link: author.linkedin,
-    color: 'var(--blue)'
-  },
-  {
-    icon: 'ri-github-line',
-    label: 'GitHub',
-    value: 'PrathamGupta06',
-    link: author.github,
-    color: 'var(--yellow)'
-  }
-]
+import Button from "./Button.astro";
+import Bars from "./Bars.astro";
+import { author } from "../sample";
 ---
 
-<section class="py-25 space-y-10 px-5" id="contact">
-  <div class="max-w-md mx-auto relative">
-    <h1 class="text-4xl font-medium text-center">Get In Touch</h1>
-    <img src={svgUnderline.src} alt="underline" width="140" class="absolute left-50 -bottom-1" />
-  </div>
+<section class="px-5 py-24 bg-(--alt-bg)" id="contact">
+  <div class="max-w-3xl mx-auto bg-white text-center flex flex-col items-center gap-5 border-3 shadow-[8px_8px_0px_rgba(0,0,0,0.3)] relative p-8 md:p-12">
+    <h2 class="text-3xl md:text-4xl font-medium">Let's build something together</h2>
+    <p class="text-lg max-w-xl">
+      Need an AI agent, a RAG system or a web app built, or just want to talk
+      shop about AI? Send me a note with what you have in mind.
+    </p>
 
-  <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-    {contactMethods.map((contact) => (
-      <a 
-        href={contact.link}
-        target={contact.link.startsWith('http') ? '_blank' : '_self'}
-        rel={contact.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-        class="bg-white p-6 border-2 relative transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,0.3)] hover:-translate-y-1 group"
-      >
-        <div class="flex items-center gap-4">
-          <div 
-            class="w-14 h-14 flex items-center justify-center border-2 flex-shrink-0"
-            style={`background-color: ${contact.color}`}
-          >
-            <i class={`${contact.icon} text-3xl`}></i>
-          </div>
-          
-          <div class="flex-1">
-            <p class="text-sm uppercase font-medium text-gray-600 mb-1">{contact.label}</p>
-            <p class="text-lg font-medium break-all">{contact.value}</p>
-          </div>
-          
-          <i class="ri-arrow-right-up-line text-2xl opacity-0 group-hover:opacity-100 transition-opacity"></i>
-        </div>
-      </a>
-    ))}
+    <a
+      href={author.email}
+      class="text-xl md:text-2xl font-bold break-all underline decoration-(--yellow) decoration-4 underline-offset-6 hover:bg-(--yellow)"
+    >
+      {author.emailAddress}
+    </a>
+
+    <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mt-3">
+      <Button text="Email me" link={author.email} />
+      <Button text="LinkedIn" link={author.linkedin} target="_blank" variant="secondary" />
+      <Button text="GitHub" link={author.github} target="_blank" variant="secondary" />
+    </div>
+    <Bars />
   </div>
 </section>

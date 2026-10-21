@@ -1,0 +1,13 @@
+---
+const { title, subtitle } = Astro.props;
+---
+
+<div class="max-w-2xl mx-auto text-center space-y-3">
+  <h2 class="text-3xl md:text-4xl font-medium">
+    <span class="relative inline-block">
+      <span class="absolute bg-(--yellow) w-full h-[40%] left-0 bottom-0.5"></span>
+      <span class="relative">{title}</span>
+    </span>
+  </h2>
+  {subtitle && <p class="text-base md:text-lg text-gray-700">{subtitle}</p>}
+</div>

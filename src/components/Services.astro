@@ -1,0 +1,70 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import { author } from "../sample";
+
+const services = [
+  {
+    name: "AI Agents & Automation",
+    desc: "Multi-agent systems that research, reason and act across your tools, so repetitive operational work runs itself.",
+    proof: "Built a LangGraph multi-agent system for automated root-cause analysis at Spector.ai",
+    icon: "ri-robot-2-line",
+    color: "var(--yellow)",
+  },
+  {
+    name: "RAG & Knowledge Assistants",
+    desc: "Assistants that answer questions from your PDFs, docs and internal knowledge, grounded in your data.",
+    proof: "Built an enterprise-scale RAG pipeline over PDF and DOCX documents",
+    icon: "ri-file-search-line",
+    color: "var(--pink)",
+  },
+  {
+    name: "Model Deployment & Optimization",
+    desc: "Take models from notebook to production: serverless or containerised, optimised for latency and cost.",
+    proof: "Cut ViT inference from 1s to 100ms, scaled to 1B+ inferences a year",
+    icon: "ri-speed-up-line",
+    color: "var(--blue)",
+  },
+  {
+    name: "Full-Stack Web Apps",
+    desc: "Fast, reliable web products with React / Next.js frontends and Python backends that hold up under traffic spikes.",
+    proof: "CBSE results platform: 125K+ requests at peak, 5,000+ schools",
+    icon: "ri-window-2-line",
+    color: "var(--yellow)",
+  },
+];
+---
+
+<section class="py-24 space-y-12 px-5" id="services">
+  <SectionHeading
+    title="What I can build for you"
+    subtitle="Have an idea that needs AI or a solid web product? Here is where I can help."
+  />
+
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 border-t-3 border-l-3 bg-white">
+    {
+      services.map((item) => (
+        <div class="flex flex-col gap-3 p-6 md:p-8 border-r-3 border-b-3">
+          <div
+            class="w-12 h-12 flex items-center justify-center text-2xl border-2"
+            style={`background-color: ${item.color}`}
+          >
+            <i class={item.icon} />
+          </div>
+          <h3 class="text-xl md:text-2xl font-medium">{item.name}</h3>
+          <p class="text-base text-gray-800 leading-relaxed">{item.desc}</p>
+          <p class="mt-auto pt-2 text-sm text-gray-600 flex gap-2">
+            <i class="ri-checkbox-circle-line text-base" />
+            <span>{item.proof}</span>
+          </p>
+        </div>
+      ))
+    }
+  </div>
+
+  <p class="text-center text-lg">
+    Have a project in mind?{" "}
+    <a href={author.email} class="font-bold underline decoration-(--yellow) decoration-4 underline-offset-4 hover:bg-(--yellow)">
+      Tell me about it
+    </a>
+  </p>
+</section>

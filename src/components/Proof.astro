@@ -1,0 +1,46 @@
+---
+const proof = [
+  {
+    value: "1B+",
+    label: "Inferences / year",
+    sublabel: "Vision models on Azure Functions",
+    color: "var(--yellow)",
+  },
+  {
+    value: "10×",
+    label: "Faster inference",
+    sublabel: "1s → 100ms with ONNX + quantization",
+    color: "var(--pink)",
+  },
+  {
+    value: "AIR 104",
+    label: "GATE DS & AI",
+    sublabel: "Among 91,000+ candidates",
+    color: "var(--blue)",
+  },
+  {
+    value: "2×",
+    label: "ICPC Regionalist",
+    sublabel: "Asia West, 2024 & 2025",
+    color: "var(--yellow)",
+  },
+];
+---
+
+<section class="px-5 py-14 border-y-3 bg-white" id="proof" aria-label="Highlights">
+  <div class="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6">
+    {
+      proof.map((item) => (
+        <div class="text-center md:text-left">
+          <div class="text-4xl md:text-5xl font-bold">
+            <span class="px-1" style={`background: linear-gradient(transparent 55%, ${item.color} 55%)`}>
+              {item.value}
+            </span>
+          </div>
+          <div class="text-base font-medium mt-3">{item.label}</div>
+          <div class="text-sm text-gray-600 mt-1">{item.sublabel}</div>
+        </div>
+      ))
+    }
+  </div>
+</section>

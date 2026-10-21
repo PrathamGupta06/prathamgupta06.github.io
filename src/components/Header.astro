@@ -1,46 +1,21 @@
 ---
 import logoStar from "../assets/logo-star.svg";
 
-import { author, buy } from "../sample";
 
 const links = [
-  { name: "About", path: "/#hero", target: "_self", section: "hero" },
-  {
-    name: "Experience",
-    path: "/#experience",
-    target: "_self",
-    section: "experience",
-  },
-  {
-    name: "Projects",
-    path: "/#projects",
-    target: "_self",
-    section: "projects",
-  },
-  {
-    name: "Achievements",
-    path: "/#achievements",
-    target: "_self",
-    section: "achievements",
-  },
-  {
-    name: "Education",
-    path: "/#education",
-    target: "_self",
-    section: "education",
-  },
-  { name: "Skills", path: "/#skills", target: "_self", section: "skills" },
-  { name: "Contact", path: "/#contact", target: "_self", section: "contact" },
+  { name: "Experience", path: "/#experience", section: "experience" },
+  { name: "Services", path: "/#services", section: "services" },
+  { name: "Projects", path: "/#projects", section: "projects" },
+  { name: "Awards", path: "/#achievements", section: "achievements" },
 ];
 
-const { pathname } = Astro.url;
 ---
 
 <header
-  class="fixed top-0 left-0 right-0 z-50 border-b-3 p-4 md:p-7 overflow-hidden bg-(--main-bg)"
+  class="fixed top-0 left-0 right-0 z-50 border-b-3 p-4 md:p-5 overflow-hidden bg-(--main-bg)"
 >
   <div
-    class="flex border-3 border-black bg-white max-w-[310px] md:max-w-2xl m-auto relative z-10"
+    class="flex border-3 border-black bg-white max-w-[310px] md:max-w-3xl m-auto relative z-10"
   >
     <!-- top boxes -->
     <div class="size-2 bg-white border-2 border-black absolute -top-2 -right-2">
@@ -59,7 +34,7 @@ const { pathname } = Astro.url;
     </div>
 
     <nav class="flex w-full items-center p-2 md:p-0">
-      <a href="#" class="flex md:hidden" id="menu-open">
+      <a href="#" class="flex md:hidden" id="menu-open" aria-label="Open menu">
         <i class="ri-menu-2-line text-2xl ml-3"></i>
       </a>
       <ul class="hidden md:flex w-full">
@@ -68,7 +43,6 @@ const { pathname } = Astro.url;
             <li class="border-l-2 border-black p-3 py-4 flex-1 first:border-l-0">
               <a
                 href={item.path}
-                target={item.target}
                 data-section={item.section}
                 class="nav-link whitespace-nowrap relative flex items-center justify-center before:absolute before:left-0 before:bottom-1 before:h-2 before:w-0 before:bg-(--yellow) before:transition-all before:duration-300 hover:before:w-full"
               >
@@ -77,18 +51,33 @@ const { pathname } = Astro.url;
             </li>
           ))
         }
+        <li class="border-l-2 border-black flex-1 bg-(--yellow)">
+          <a
+            href="/#contact"
+            data-section="contact"
+            class="nav-link flex h-full items-center justify-center gap-1 px-3 py-4 font-bold whitespace-nowrap hover:bg-black hover:text-white transition-colors duration-200"
+          >
+            Contact me
+          </a>
+        </li>
       </ul>
+      <a
+        href="/#contact"
+        class="ml-auto mr-1 flex md:hidden items-center gap-1 px-3 py-1.5 border-2 bg-(--yellow) font-bold text-sm"
+      >
+        Contact me
+      </a>
     </nav>
   </div>
 </header>
 
 <div
-  class="block md:hidden fixed left-0 top-0 h-full w-full bg-white z-20 p-3 transition-all duration-300 -translate-x-full"
+  class="block md:hidden fixed left-0 top-0 h-full w-full bg-white z-[60] p-3 transition-all duration-300 -translate-x-full"
   id="menu-content"
 >
   <div class="flex p-6">
     <h3 class="flex-1 font-bold uppercase">Menu</h3>
-    <a href="#" id="menu-close">
+    <a href="#" id="menu-close" aria-label="Close menu">
       <i class="ri-close-line text-3xl"></i>
     </a>
   </div>
@@ -98,7 +87,6 @@ const { pathname } = Astro.url;
         <li class="py-3">
           <a
             href={item.path}
-            target={item.target}
             data-section={item.section}
             class="nav-link p-3 whitespace-nowrap text-2xl font-bold"
           >
@@ -119,17 +107,17 @@ const { pathname } = Astro.url;
     // Mobile menu handlers
     menuOpen?.addEventListener("click", (e) => {
       e.preventDefault();
-      menuContent?.classList.remove("-translate-x-[100%]");
+      menuContent?.classList.remove("-translate-x-full");
     });
 
     menuClose?.addEventListener("click", (e) => {
       e.preventDefault();
-      menuContent?.classList.add("-translate-x-[100%]");
+      menuContent?.classList.add("-translate-x-full");
     });
 
     menuContent?.querySelectorAll("li a").forEach((item) => {
       item.addEventListener("click", (e) => {
-        menuContent?.classList.add("-translate-x-[100%]");
+        menuContent?.classList.add("-translate-x-full");
       });
     });
 
@@ -179,7 +167,7 @@ const { pathname } = Astro.url;
       },
       {
         // Treat the area below the fixed header as the viewport.
-        rootMargin: "-120px 0px -40% 0px",
+        rootMargin: "-100px 0px -40% 0px",
         threshold: [0, 0.25, 0.5, 0.75, 1],
       },
     );

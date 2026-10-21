@@ -1,95 +1,88 @@
 ---
-import Bars from "./Bars.astro";
-import svgUnderline from "../assets/underline.svg";
+import SectionHeading from "./SectionHeading.astro";
 
 const projects = [
   {
     name: "CBSE Results Parser & Analytics Platform",
-    tech: "NextJS, Firebase, Cloudflare, Vercel",
+    tech: ["Next.js", "Firebase", "Cloudflare", "Python"],
     description:
-      "Developed web platform for automated CBSE result processing, serving 2000+ schools with 125K+ requests and 10K+ unique visits internationally",
+      "A web platform that turns raw CBSE result files into school-level analytics. It ran under heavy load during result hours, with sub-second responses throughout.",
     features: [
-      "Built smart parser with statistical analysis and Firebase authentication",
-      "Deployed with both web and CLI interface",
+      "Custom parsing algorithm with built-in statistical analysis",
+      "Cloudflare caching and DDoS protection to absorb peak-hour traffic",
+      "Web and CLI interfaces, with Firebase authentication",
     ],
     link: "https://cbseresult.pratham.eu.org/",
-    linkText: "Live Demo",
-    stats: ["2000+ Schools", "125K+ Requests", "10K+ Visits"],
+    linkText: "Live site",
+    stats: [
+      { value: "5,000+", label: "Schools" },
+      { value: "125K+", label: "Peak requests" },
+      { value: "10K+", label: "Unique users" },
+    ],
   },
   {
-    name: "TripAlly - AI Travel Planning Assistant",
-    tech: "Python, LangGraph, FastAPI, Groq",
+    name: "TripAlly: AI Travel Assistant",
+    tech: ["Python", "LangGraph", "FastAPI", "Groq"],
     description:
-      "Engineered AI travel concierge using multi-agent architecture with Groq's ultra-fast LLMs and browsing automation along with SSE for end-to-end booking procedure",
+      "A multi-agent AI travel concierge that browses the web on its own to plan trips and carry out bookings end to end.",
     features: [
-      "Multi-agent architecture with Groq's ultra-fast LLMs",
-      "End-to-end booking automation with SSE",
+      "Multi-agent architecture running on Groq's low-latency LLMs",
+      "Autonomous web browsing for search and booking",
+      "Server-Sent Events stream each agent step to the user in real time",
     ],
     link: "https://github.com/PrathamGupta06/TripAlly",
-    linkText: "GitHub",
-    stats: ["AI-Powered", "Multi-Agent", "FastAPI"],
+    linkText: "Source on GitHub",
+    stats: [],
   },
 ];
 ---
 
-<section class="py-25 space-y-10 px-5" id="projects">
-  <div class="max-w-md mx-auto relative">
-    <h1 class="text-4xl font-medium text-center">Featured Projects</h1>
-    <img
-      src={svgUnderline.src}
-      alt="underline"
-      width="140"
-      class="absolute left-50 -bottom-1"
-    />
-  </div>
+<section class="py-24 space-y-12 px-5 bg-(--alt-bg)" id="projects">
+  <SectionHeading title="Featured Projects" />
 
-  <div class="max-w-4xl mx-auto grid grid-cols-1 gap-8">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
     {
-      projects.map((project, index) => (
-        <div class="bg-white p-6 md:p-8 border-2 relative transition-all duration-200 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.3)] group">
-          <div class="flex items-start gap-3 mb-4">
-            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold text-lg">
-              {index + 1}
-            </div>
-            <div class="flex-1">
-              <h3 class="text-xl md:text-2xl font-medium">{project.name}</h3>
-              <p class="text-sm text-gray-600 mt-1 font-medium">
-                {project.tech}
-              </p>
-            </div>
+      projects.map((project) => (
+        <article class="bg-white p-6 md:p-8 border-2 shadow-[6px_6px_0px_rgba(0,0,0,0.15)] flex flex-col">
+          <h3 class="text-xl md:text-2xl font-medium">{project.name}</h3>
+          <div class="flex flex-wrap gap-2 mt-3">
+            {project.tech.map((t) => (
+              <span class="px-2.5 py-0.5 border-2 text-xs font-medium uppercase bg-(--main-bg)">{t}</span>
+            ))}
           </div>
 
-          <p class="text-base leading-relaxed mb-4">{project.description}</p>
+          <p class="text-base leading-relaxed mt-4">{project.description}</p>
 
-          <ul class="space-y-2 mb-4">
+          {project.stats.length > 0 && (
+            <div class="grid grid-cols-3 border-2 mt-5 divide-x-2">
+              {project.stats.map((stat) => (
+                <div class="p-3 text-center">
+                  <div class="text-xl md:text-2xl font-bold">{stat.value}</div>
+                  <div class="text-xs uppercase text-gray-600 mt-0.5">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <ul class="space-y-2 mt-5 mb-6">
             {project.features.map((feature) => (
               <li class="flex gap-2 text-sm">
-                <span class="flex-shrink-0">✓</span>
+                <i class="ri-check-line flex-shrink-0" />
                 <span>{feature}</span>
               </li>
             ))}
           </ul>
 
-          <div class="flex flex-wrap gap-2 mb-4">
-            {project.stats.map((stat) => (
-              <span class="px-3 py-1 bg-(--yellow) border-2 text-xs font-medium uppercase">
-                {stat}
-              </span>
-            ))}
-          </div>
-
           <a
             href={project.link}
-            class="inline-flex items-center gap-2 px-4 py-2 border-2 bg-white hover:bg-black hover:text-white transition-all duration-200 font-medium"
+            class="mt-auto self-start inline-flex items-center gap-2 px-4 py-2 border-2 bg-(--yellow) hover:bg-black hover:text-white transition-all duration-200 font-medium"
             target="_blank"
             rel="noopener noreferrer"
           >
             <span>{project.linkText}</span>
             <i class="ri-arrow-right-up-line" />
           </a>
-
-          <Bars />
-        </div>
+        </article>
       ))
     }
   </div>

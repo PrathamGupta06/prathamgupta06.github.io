@@ -2,95 +2,82 @@
 import Button from "./Button.astro";
 import Bars from "./Bars.astro";
 
-// hero-content.svg removed per request (replaced by initials badge)
 import svgIdea from "../assets/idea.svg";
-
 import svgString from "../assets/string.svg";
 
-import { author, buy } from "../sample";
+import { author } from "../sample";
 import profile from "../assets/profile.jpg";
 ---
 
-<section class="pb-20 relative pt-32 md:pt-40" id="hero">
-  <div class="max-w-4xl mx-auto p-4">
+<section class="pb-20 relative pt-28 md:pt-36" id="hero">
+  <div class="max-w-5xl mx-auto p-4">
     <div class="grid grid-cols-1 md:grid-cols-[60%_40%] items-center">
-      <div class="flex flex-col gap-4 pr-0 md:pr-10">
-        <h1 class="text-5xl font-medium">
-          <span>I build </span>
-          <span class="relative">
-            <span
-              class="absolute bg-(--yellow) w-full h-[50%] left-0 bottom-0 z-1"
-            ></span>
-            <span class="relative z-5">AI-powered</span>
-          </span>
-          <br />
-          <span>solutions</span>
+      <div class="flex flex-col gap-5 pr-0 md:pr-10">
+        <h1 class="text-5xl md:text-6xl font-bold tracking-tight">
+          {author.name}
         </h1>
-        <p class="text-xl">{author.tagline}</p>
-        <p class="text-base text-gray-700">{author.description}</p>
 
-        <!-- Contact Info -->
-        <div class="flex flex-wrap gap-4 mt-2 text-sm">
-          <a
-            href={author.email}
-            class="flex items-center gap-1 hover:underline"
-          >
-            <i class="ri-mail-line"></i>
-            <span>Email</span>
-          </a>
-          <a
-            href={author.linkedin}
-            target="_blank"
-            class="flex items-center gap-1 hover:underline"
-          >
-            <i class="ri-linkedin-box-line"></i>
-            <span>LinkedIn</span>
-          </a>
-          <a
-            href={author.github}
-            target="_blank"
-            class="flex items-center gap-1 hover:underline"
-          >
-            <i class="ri-github-line"></i>
-            <span>GitHub</span>
-          </a>
+        <p class="text-2xl md:text-3xl font-medium leading-snug">
+          I build production{" "}
+          <span class="relative inline-block">
+            <span class="absolute bg-(--yellow) w-full h-[45%] left-0 bottom-0.5"></span>
+            <span class="relative">AI agents</span>
+          </span>{" "}
+          and ML systems that ship.
+        </p>
+
+        <p class="text-base md:text-lg text-gray-800">
+          ML Intern at <strong>Tower Research Capital</strong> · previously AI
+          at <strong>Inteligenai</strong> · <strong>ICPC</strong> Asia West Regionalist
+        </p>
+
+        <p class="text-base text-gray-700">
+          From multi-agent systems and RAG pipelines to models serving 1B+
+          inferences a year, I take AI products from idea to production.
+        </p>
+
+        <div class="flex flex-wrap items-center mt-3 gap-x-8 gap-y-4">
+          <Button text="Get in touch" link={author.email} />
+          <Button text="See my work" link="/#projects" variant="secondary" />
         </div>
 
-        <div class="flex mt-5 gap-3 overflow-x-clip">
-          <Button text="View Projects" link="/#projects" target="_self" />
-          <!-- <Button text="Download Resume" link="#" target="_blank" /> -->
+        <div class="flex flex-wrap gap-5 text-sm">
+          <a href={author.github} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:underline">
+            <i class="ri-github-line text-lg"></i> GitHub
+          </a>
+          <a href={author.linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:underline">
+            <i class="ri-linkedin-box-line text-lg"></i> LinkedIn
+          </a>
+          <a href={author.email} class="flex items-center gap-1 hover:underline">
+            <i class="ri-mail-line text-lg"></i> {author.emailAddress}
+          </a>
         </div>
       </div>
-      <div class="relative mt-40 md:mt-0">
-        <div class="relative p-8 bg-white">
+
+      <div class="relative mt-16 md:mt-0 max-w-sm w-full mx-auto">
+        <div class="relative p-6 bg-white">
           <img
             src={svgIdea.src}
             width="60"
-            alt="idea"
+            alt=""
             class="absolute top-16 -left-3 z-10 hidden md:block"
           />
           <img
             src={svgString.src}
             width="50"
-            alt="string"
+            alt=""
             class="absolute -top-6 right-0 md:-right-2 z-10"
           />
 
           <div
             id="me"
-            class="w-full h-[310px] border-2"
+            role="img"
+            aria-label={`Photo of ${author.name}`}
+            class="w-full h-[340px] border-2"
             style={`background-image: url(${profile.src}); background-position: top; background-size: cover; transform: scaleX(-1);`}
           >
           </div>
           <Bars />
-        </div>
-
-        <!-- Name badge below photo -->
-        <div class="mt-4 text-center">
-          <h3 class="text-2xl font-bold uppercase tracking-wide">
-            {author.name}
-          </h3>
-          <p class="text-sm text-gray-600 mt-1">{author.tagline}</p>
         </div>
       </div>
     </div>
