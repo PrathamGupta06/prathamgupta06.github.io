@@ -1,8 +1,8 @@
 const author = {
   name: `Pratham Gupta`,
   nickname: `Pratham`,
-  emailAddress: `prathamgupta006@gmail.com`,
-  email: "mailto:prathamgupta006@gmail.com",
+  emailAddress: `prathamguptadev@gmail.com`,
+  email: "mailto:prathamguptadev@gmail.com",
   linkedin: `https://linkedin.com/in/prathamgupta006`,
   github: `https://github.com/PrathamGupta06`,
   tagline: `AI/ML Engineer & Full-Stack Developer`,
