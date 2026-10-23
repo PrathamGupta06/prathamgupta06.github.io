@@ -39,18 +39,18 @@ import profile from "../assets/profile.jpg";
         </p>
 
         <div class="flex flex-wrap items-center mt-3 gap-x-8 gap-y-4">
-          <Button text="Get in touch" link={author.email} />
-          <Button text="See my work" link="/#projects" variant="secondary" />
+          <Button text="Get in touch" link={author.email} data-ga="contact_click" data-ga-method="email" data-ga-location="hero" />
+          <Button text="See my work" link="/#projects" variant="secondary" data-ga="cta_click" data-ga-location="hero" />
         </div>
 
         <div class="flex flex-wrap gap-5 text-sm">
-          <a href={author.github} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:underline">
+          <a href={author.github} target="_blank" rel="noopener noreferrer" data-ga="social_click" data-ga-network="github" data-ga-location="hero" class="flex items-center gap-1 hover:underline">
             <i class="ri-github-line text-lg"></i> GitHub
           </a>
-          <a href={author.linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:underline">
+          <a href={author.linkedin} target="_blank" rel="noopener noreferrer" data-ga="social_click" data-ga-network="linkedin" data-ga-location="hero" class="flex items-center gap-1 hover:underline">
             <i class="ri-linkedin-box-line text-lg"></i> LinkedIn
           </a>
-          <a href={author.email} class="flex items-center gap-1 hover:underline">
+          <a href={author.email} data-ga="contact_click" data-ga-method="email" data-ga-location="hero" class="flex items-center gap-1 hover:underline">
             <i class="ri-mail-line text-lg"></i> {author.emailAddress}
           </a>
         </div>

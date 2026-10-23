@@ -2,6 +2,8 @@
 import { author } from "../sample";
 import profile from "../assets/profile.jpg";
 
+const gaId = "G-FFWGWCFEHS";
+
 const title = `${author.name} | ${author.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(profile.src, Astro.site).href;
@@ -42,6 +44,22 @@ const personSchema = {
 
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
+    {
+      import.meta.env.PROD && (
+        <>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+          <script is:inline define:vars={{ gaId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", gaId);
+          </script>
+        </>
+      )
+    }
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -57,6 +75,44 @@ const personSchema = {
     <slot />
   </body>
 </html>
+
+<script>
+  // Elements opt in with data-ga="<event_name>"; any data-ga-* attributes
+  // become event parameters (data-ga-location -> location).
+  const track = (name: string, params: Record<string, string> = {}) => {
+    (window as any).gtag?.("event", name, params);
+  };
+
+  document.addEventListener("click", (e) => {
+    const el = (e.target as Element).closest<HTMLElement>("[data-ga]");
+    if (!el) return;
+
+    const params: Record<string, string> = {};
+    for (const [key, value] of Object.entries(el.dataset)) {
+      if (key.startsWith("ga") && key !== "ga" && value) {
+        const name = key.slice(2);
+        params[name[0].toLowerCase() + name.slice(1)] = value;
+      }
+    }
+    track(el.dataset.ga!, params);
+  });
+
+  // Fire section_view once per section per visit.
+  const seen = new Set<string>();
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting || seen.has(entry.target.id)) continue;
+        seen.add(entry.target.id);
+        track("section_view", { section: entry.target.id });
+      }
+    },
+    { threshold: 0.4 },
+  );
+  document
+    .querySelectorAll("section[id]")
+    .forEach((section) => sectionObserver.observe(section));
+</script>
 
 <style is:global>
   :root {

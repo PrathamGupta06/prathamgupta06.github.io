@@ -23,6 +23,10 @@ const socials = [
             target={item.link.startsWith("http") ? "_blank" : undefined}
             rel="noopener noreferrer"
             aria-label={item.label}
+            data-ga={item.label === "Email" ? "contact_click" : "social_click"}
+            data-ga-method={item.label === "Email" ? "email" : undefined}
+            data-ga-network={item.label === "Email" ? undefined : item.label.toLowerCase()}
+            data-ga-location="footer"
             class="transition-all duration-200 hover:translate-y-0.5"
           >
             <i class={`${item.icon} text-2xl`} />

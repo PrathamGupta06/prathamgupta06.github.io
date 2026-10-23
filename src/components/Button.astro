@@ -1,5 +1,5 @@
 ---
-const { text, link, target, variant = "primary" } = Astro.props
+const { text, link, target, variant = "primary", ...attrs } = Astro.props
 
 import svgHl from '../assets/hl.svg'
 
@@ -11,6 +11,7 @@ const bg = variant === "primary" ? "bg-(--blue)" : "bg-white"
       href={link}
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : undefined}
+      {...attrs}
       class={`${bg} text-black text-md font-medium flex items-center h-12 px-6 border-3 rounded-full transition-shadow duration-200 hover:shadow-[3px_3px_0px_rgba(0,0,0,1)]`}
    >{text}</a>
    {variant === "primary" && (

@@ -75,6 +75,9 @@ const projects = [
 
           <a
             href={project.link}
+            data-ga="project_click"
+            data-ga-project-name={project.name}
+            data-ga-link-url={project.link}
             class="mt-auto self-start inline-flex items-center gap-2 px-4 py-2 border-2 bg-(--yellow) hover:bg-black hover:text-white transition-all duration-200 font-medium"
             target="_blank"
             rel="noopener noreferrer"

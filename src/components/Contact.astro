@@ -14,15 +14,18 @@ import { author } from "../sample";
 
     <a
       href={author.email}
+      data-ga="contact_click"
+      data-ga-method="email"
+      data-ga-location="contact"
       class="text-xl md:text-2xl font-bold break-all underline decoration-(--yellow) decoration-4 underline-offset-6 hover:bg-(--yellow)"
     >
       {author.emailAddress}
     </a>
 
     <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mt-3">
-      <Button text="Email me" link={author.email} />
-      <Button text="LinkedIn" link={author.linkedin} target="_blank" variant="secondary" />
-      <Button text="GitHub" link={author.github} target="_blank" variant="secondary" />
+      <Button text="Email me" link={author.email} data-ga="contact_click" data-ga-method="email" data-ga-location="contact" />
+      <Button text="LinkedIn" link={author.linkedin} target="_blank" variant="secondary" data-ga="social_click" data-ga-network="linkedin" data-ga-location="contact" />
+      <Button text="GitHub" link={author.github} target="_blank" variant="secondary" data-ga="social_click" data-ga-network="github" data-ga-location="contact" />
     </div>
     <Bars />
   </div>
